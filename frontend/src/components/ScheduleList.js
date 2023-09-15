@@ -9,7 +9,7 @@ import Schedules  from './Schedules';
 const ScheduleList = () => {
   const {data: schedules,  isLoading, refetch: getAllSchedule } = useGetSchedulesQuery();
   const [show, setShow] = useState(false);
-    
+    console.log(schedules)
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
    
@@ -26,27 +26,27 @@ const ScheduleList = () => {
             </div>
         </div>
         {isLoading && <Loader />}
-        { schedules.length ? ( 
-        <table className="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Actions</th>
+        { schedules?.length === 0 ? ( 
+        <h1>'Schedule is not available'</h1>
+        ) : ( <table className="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            { 
+                schedules?.map(schedule => (
+                    <tr key={schedule.title}>
+                    <Schedules schedule={schedule} refetch={getAllSchedule}/>
                 </tr>
-            </thead>
-            <tbody>
-                { 
-                    schedules?.map(schedule => (
-                        <tr key={schedule.title}>
-                        <Schedules schedule={schedule} refetch={getAllSchedule}/>
-                    </tr>
-                    ))  
-                } 
-            </tbody>
-        </table>
-        ) : ( <h1>'Schedule is not available'</h1> )} 
+                ))  
+            } 
+        </tbody>
+    </table> )} 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>
