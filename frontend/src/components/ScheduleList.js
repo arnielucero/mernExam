@@ -7,9 +7,8 @@ import Loader from './Loader';
 import Schedules  from './Schedules';
 
 const ScheduleList = () => {
-  const {data: schedules,  isLoading, refetch: getAllSchedule } = useGetSchedulesQuery();
-  const [show, setShow] = useState(false);
-    console.log(schedules)
+    const {data: schedules,  isLoading, refetch: getAllSchedule } = useGetSchedulesQuery();
+    const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
    

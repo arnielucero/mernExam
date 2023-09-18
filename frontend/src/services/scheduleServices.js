@@ -2,12 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseUrl = `${process.env.REACT_APP_API_URL}`;
 const apiUrl = "/rest/v1/schedules";
-/*
- * Get countries API is an open-source service for getting country information
- * https://restcountries.com
- *
- */
-console.log('url:',baseUrl)
 export const api = createApi({
   reducerPath: "scheduleApi",
   baseQuery: fetchBaseQuery({

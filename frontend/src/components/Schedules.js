@@ -24,7 +24,6 @@ const Schedules = ({schedule, refetch}) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this item?');
 
     if (confirmDelete) {
-        console.log(id);
         try {
           await deleteSchedule(id).unwrap();
           refetch(); 
@@ -34,7 +33,7 @@ const Schedules = ({schedule, refetch}) => {
     }
     };
     
-      return (
+    return (
         <>
             <td>{title}</td>
             <td>{description}</td>
@@ -58,14 +57,11 @@ const Schedules = ({schedule, refetch}) => {
                         Remove
                     </button>
                 </OverlayTrigger>
-                
-                
             </td>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Edit Employee
+                        Edit Schedule
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

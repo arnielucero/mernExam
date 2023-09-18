@@ -17,7 +17,7 @@ const ScheduleForm = ({ scheduleInfo, handleClose, refetch }) => {
 
   const [createSchedule, { isLoading }] = useCreateScheduleMutation();
   const [updateSchedule, { isSaving }] = useUpdateScheduleMutation();
-  
+  const [error, setError] = useState("")
   const onInputChange = (e) => {
     setNewSchedule({...newSchedule,[e.target.name]: e.target.value})
   }
@@ -35,12 +35,14 @@ const ScheduleForm = ({ scheduleInfo, handleClose, refetch }) => {
         handleClose();
         refetch();
       } catch (err) {
-        console.log(err?.data?.message || err.error);
+        setError(err?.data?.message);
       }
     } 
   };
 
   return (
+    <>
+    { error ? <h5>{error} try new one!!!</h5> : '' }
     <Form onSubmit={handleSubmit}>
       <Form.Group>
           <Form.Control
@@ -69,13 +71,15 @@ const ScheduleForm = ({ scheduleInfo, handleClose, refetch }) => {
               name="selectedDate"
               value={selectedDate}
               onChange = { (e) => onInputChange(e)}
-              required
+              
           />
       </Form.Group>
       <br />
        <Button variant="success" type="submit" block>{buttonTitle}</Button>
        {(isLoading || isSaving) && <Loader />}
     </Form>
+ 
+    </>
   );
 }
 
